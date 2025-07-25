@@ -1,0 +1,1266 @@
+/* ===================================== */
+/* ESTILOS GENERALES Y RESETS */
+/* ===================================== */
+:root {
+    --color-primary: #041952;
+    --color-secondary: #ffbe0b; /* Amarillo/Dorado */
+    --color-accent: #00b4d8;    /* Azul claro */
+    --color-text-dark: #333;
+    --color-text-light: #f8f5ed;
+    --color-bg-light: #f8f5ed;
+    --color-bg-very-light: #fffeeb;
+    --color-shadow-light: rgba(0, 0, 0, 0.1);
+    --color-shadow-medium: rgba(0, 0, 0, 0.15);
+    --color-shadow-strong: rgba(0, 0, 0, 0.2);
+    --color-background-gray: #f2f2f2; /* Definido el color gris para el sidebar */
+    --font-heading: 'Georgia', serif;
+    --font-body: 'Arial', sans-serif;
+    --border-radius-card: 15px;
+    --header-height-mobile: 80px; /* Altura aproximada del header en móvil */
+    --header-height-desktop: 100px; /* Altura aproximada del header en desktop */
+}
+
+/* Declaración @font-face para AmsterdamOne */
+@font-face {
+    font-family: 'AmsterdamOne';
+    src: url('fonts/AmsterdamOne.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.6;
+    color: var(--color-text-dark);
+    background-color: var(--color-bg-light);
+    overflow-x: hidden; /* Previene el scroll horizontal */
+}
+
+/* ===================================== */
+/* LAYOUT PRINCIPAL Y SECCIONES SPA */
+/* ===================================== */
+
+/* Oculta las secciones por defecto. La transición se aplicará cuando se cambie la opacidad. */
+.section-hidden {
+    display: none; /* Se cambia con JS */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+/* Muestra las secciones activas. */
+.is-active {
+    display: block; /* Se cambia con JS */
+    opacity: 1;
+    visibility: visible;
+}
+
+section {
+    padding: 60px 20px;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ===================================== */
+/* HEADER Y NAVEGACIÓN */
+/* ===================================== */
+header {
+    background-color: var(--color-primary);
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column; /* Por defecto en móvil */
+    align-items: flex-start;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1000;
+    box-shadow: 0 2px 10px var(--color-shadow-light);
+    width: 100%;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.logo {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.texto-header .firma {
+    font-family: 'AmsterdamOne', var(--font-heading), serif;
+    font-size: 1.8em;
+    margin: 0;
+    color: var(--color-bg-very-light);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden; /* Asegura que ellipsis funcione */
+    max-width: 100%; /* Limita el ancho para el ellipsis */
+}
+
+.menu-toggle {
+    display: none; /* Oculto por defecto en desktop */
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.8em;
+    cursor: pointer;
+    padding: 6px;
+    transition: color 0.3s ease;
+}
+
+.menu-toggle:hover {
+    color: var(--color-secondary);
+}
+
+.header-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.header-bottom nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.header-bottom nav a:hover {
+    color: var(--color-secondary);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.social-icons-header a {
+    color: #fff;
+    font-size: 1.5em;
+    margin-left: 15px;
+    transition: color 0.3s ease;
+}
+
+.social-icons-header a:hover {
+    color: var(--color-secondary);
+}
+
+/* ===================================== */
+/* SECCIÓN INICIO */
+/* ===================================== */
+#INICIO {
+    background-color: var(--color-bg-very-light);
+    color: var(--color-text-dark);
+    min-height: calc(100vh - var(--header-height-desktop)); /* Usa variable para altura del header */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#INICIO h2 {
+    font-size: 2.8em;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+    font-family: var(--font-heading);
+}
+
+#INICIO p {
+    font-size: 1.2em;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    line-height: 1.8;
+}
+
+.agenda-btn-container {
+    margin-top: 30px;
+}
+
+.agenda-btn {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px var(--color-shadow-light);
+}
+
+.agenda-btn:hover {
+    background-color: #00a71c; /* Un verde vibrante para "agendar" */
+    transform: translateY(-3px);
+}
+
+.internal-section-link {
+    color: var(--color-primary);
+    text-decoration: underline;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.internal-section-link:hover {
+    color: var(--color-accent);
+}
+
+/* ===================================== */
+/* SECCIÓN ACERCA DE MI */
+/* ===================================== */
+#ACERCA-DE-MI {
+    background-color: var(--color-bg-light);
+    padding: 80px 40px;
+}
+
+#ACERCA-DE-MI h2 {
+    font-size: 3.5em;
+    color: var(--color-primary);
+    margin-bottom: 40px;
+    font-family: var(--font-heading);
+    text-align: center;
+}
+
+.about-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 40px;
+    justify-content: center;
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: var(--border-radius-card);
+    padding: 0 15px; /* Padding ajustado, la imagen sobresale del top */
+    box-shadow: 0 8px 20px var(--color-shadow-medium);
+}
+
+.about-image {
+    flex: 1;
+    min-width: 250px;
+    max-width: 350px;
+    text-align: center;
+}
+
+.about-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius-card);
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+    margin-top: -80px; /* Ajusta este valor para que la imagen sobresalga del contenedor */
+    box-shadow: 0 8px 20px var(--color-shadow-medium); /* Añade sombra a la imagen también */
+}
+
+.about-content-text {
+    flex: 2;
+    min-width: 300px;
+    text-align: justify;
+    padding-top: 30px; /* Añade padding-top para el contenido de texto */
+    padding-bottom: 30px;
+}
+
+.about-content-text h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 2em;
+    color: var(--color-primary);
+}
+
+.about-content-text p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+.about-bullets {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.bullet-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    gap: 15px;
+}
+
+.bullet-item .icon {
+    font-size: 2em;
+    color: var(--color-secondary);
+    min-width: 40px;
+    text-align: center;
+}
+
+.bullet-details .bullet-title {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: var(--color-primary);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.bullet-details p {
+    font-size: 1em;
+    margin-bottom: 0;
+}
+
+/* ================================================================= */
+/* SECCIÓN MI FORMACIÓN Y ACREDITACIONES */
+/* ================================================================= */
+.formacion-acreditaciones-container {
+    text-align: center;
+    margin-top: 80px;
+    background-color: var(--color-bg-very-light);
+    padding: 40px 20px;
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 4px 15px var(--color-shadow-light);
+}
+
+.formacion-acreditaciones-container h3 {
+    font-size: 2em;
+    color: var(--color-primary);
+    margin-bottom: 40px;
+    font-family: var(--font-heading);
+}
+
+.logos-acreditaciones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.logo-acreditacion {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.logo-acreditacion:hover {
+    transform: scale(1.05);
+}
+
+
+/* ===================================== */
+/* SECCIÓN SERVICIOS-MAIN (Overview) */
+/* ===================================== */
+#SERVICIOS-MAIN {
+    background-color: #e6eef5; /* Un tono de azul más claro */
+    text-align: center;
+    padding: 80px 40px;
+}
+
+.services-title {
+    font-size: 3.5em;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+    font-family: var(--font-heading);
+    text-align: center;
+}
+
+.services-intro-paragraph {
+    font-size: 1.2em;
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+    line-height: 1.7;
+    color: var(--color-text-dark);
+    text-align: center;
+}
+
+.services-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.service-subsection {
+    background-color: #fff;
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 8px 20px var(--color-shadow-medium);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-subsection:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px var(--color-shadow-strong);
+}
+
+.service-image-placeholder {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.service-content {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.service-text {
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+.service-content h3 {
+    font-size: 1.5em;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+    font-family: var(--font-heading);
+}
+
+.service-content p {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #555;
+}
+
+.btn-saber-mas {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: auto;
+    transition: background-color 0.3s ease;
+}
+
+.btn-saber-mas:hover {
+    background-color: var(--color-primary); /* Cambiado a color primario oscuro */
+}
+
+
+/* ===================================== */
+/* SECCIÓN BLOG */
+/* ===================================== */
+#BLOG {
+    background-color: var(--color-bg-very-light);
+    text-align: center;
+    padding: 80px 40px;
+}
+
+#BLOG h2 {
+    font-size: 3.5em;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+    font-family: var(--font-heading);
+}
+
+#BLOG p {
+    font-size: 1.1em;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    line-height: 1.7;
+}
+
+/* ===================================== */
+/* SECCIÓN TESTIMONIOS */
+/* ===================================== */
+#TESTIMONIOS {
+    background-color: var(--color-primary);
+    color: #fff;
+    text-align: center;
+    padding: 80px 40px;
+}
+
+#TESTIMONIOS h2 {
+    font-size: 2.5em;
+    color: var(--color-secondary);
+    margin-bottom: 50px;
+    font-family: var(--font-heading);
+}
+
+.testimonial-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.testimonial-item {
+    background-color: #fff;
+    color: var(--color-text-dark);
+    padding: 30px;
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 8px 20px var(--color-shadow-strong); /* Sombra más fuerte */
+    text-align: left;
+}
+
+.testimonial-item p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+.testimonial-item span {
+    font-weight: bold;
+    color: var(--color-primary);
+    display: block;
+    text-align: right;
+    font-style: italic;
+}
+
+/* ===================================== */
+/* SECCIÓN CONTACTO */
+/* ===================================== */
+#CONTACTO {
+    background-color: var(--color-bg-light);
+    padding: 80px 40px;
+    text-align: center;
+}
+
+#CONTACTO h2 {
+    font-size: 3.5em;
+    color: var(--color-primary);
+    margin-bottom: 50px;
+    font-family: var(--font-heading);
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 100%;
+    margin: 0 auto;
+    align-items: flex-start;
+    padding: 0 15px;
+}
+
+.contact-info-card,
+.contact-form-card {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 8px 20px var(--color-shadow-medium);
+    text-align: left;
+}
+
+.contact-info-card .contact-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    gap: 15px;
+}
+
+.contact-info-card .contact-item .icon {
+    font-size: 2em;
+    color: var(--color-primary);
+    min-width: 40px;
+    text-align: center;
+}
+
+.contact-info-card .contact-item .label {
+    font-weight: bold;
+    color: var(--color-primary);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.contact-info-card .contact-item p {
+    margin: 0;
+    font-size: 1.1em;
+}
+
+.contact-info-card .contact-item a {
+    color: var(--color-text-dark);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-info-card .contact-item a:hover {
+    color: var(--color-accent);
+}
+
+.contact-form-card h3 {
+    font-size: 1.8em;
+    color: var(--color-primary);
+    margin-bottom: 30px;
+    font-family: var(--font-heading);
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+    font-family: var(--font-body);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.boton {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px var(--color-shadow-light);
+}
+
+.boton:hover {
+    background-color: #003366; /* Un tono más oscuro de primary */
+    transform: translateY(-3px);
+}
+
+.map-responsive {
+    overflow: hidden;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    position: relative;
+    height: 0;
+    margin-top: 20px;
+}
+
+.map-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    border-radius: 8px;
+}
+
+
+/* ===================================== */
+/* FOOTER */
+/* ===================================== */
+footer {
+    background-color: var(--color-primary);
+    color: #fff;
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 0.9em;
+    margin-top: 0;
+}
+
+/* ===================================== */
+/* ESTILOS ESPECÍFICOS PARA servicios.html */
+/* ===================================== */
+
+/* Contenedor principal de la página de servicios para padding y background */
+.services-page-main {
+    background-color: var(--color-bg-light);
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Contenedor Flex para las dos columnas (mobile-first: columna por defecto) */
+.services-layout-container {
+    display: flex;
+    flex-direction: column; /* Columna por defecto en móvil */
+    gap: 30px;
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    align-items: flex-start;
+    padding: 0 15px; /* Padding para el contenido dentro del layout */
+}
+
+/* Columna izquierda: Contenido de los servicios */
+.services-content-wrapper {
+    flex: 1; /* Permite que ocupe el espacio disponible en móvil */
+    min-width: unset;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 8px 20px var(--color-shadow-medium);
+    width: 100%;
+}
+
+.services-content-wrapper .page-main-title {
+    font-size: 3.5em;
+    color: var(--color-primary);
+    margin-bottom: 40px;
+    font-family: var(--font-heading);
+    text-align: center;
+}
+
+/* Estilos para la imagen debajo del título de servicios */
+.services-banner-image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    display: block;
+    margin: 0 auto 40px auto;
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 4px 15px var(--color-shadow-light);
+    object-fit: cover;
+}
+
+/* Ajustes para los títulos y listas dentro de service-detail-section */
+.service-detail-section h2 {
+    font-size: 2.2em;
+    color: var(--color-primary);
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-family: var(--font-heading);
+    text-align: justify;
+}
+
+.service-detail-section h3 {
+    font-size: 1.5em;
+    color: var(--color-primary);
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-family: var(--font-heading);
+    text-align: justify;
+}
+
+.service-detail-section p {
+    text-align: justify;
+    margin-bottom: 15px;
+    line-height: 1.7;
+}
+
+.service-detail-section ul {
+    list-style: disc;
+    padding-left: 25px;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.service-detail-section ul li {
+    margin-bottom: 8px;
+    font-size: 1.05em;
+}
+
+.service-detail-section .modalidades-tarifas h4 {
+    font-size: 1.3em;
+    color: var(--color-accent);
+    margin-top: 25px;
+    margin-bottom: 10px;
+    text-align: justify;
+}
+
+.service-detail-section .warning-box {
+    background-color: #fff3cd;
+    border-left: 5px solid #ffc107;
+    padding: 15px 20px;
+    margin: 25px 0;
+    border-radius: 5px;
+    color: #664d03;
+    font-size: 0.95em;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.service-detail-section ol {
+    list-style: decimal;
+    padding-left: 25px;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.service-detail-section ol li {
+    margin-bottom: 15px;
+    font-size: 1.05em;
+    text-align: justify;
+}
+
+.service-detail-section ol li h4 {
+    margin-bottom: 5px;
+    font-size: 1.15em;
+    color: var(--color-primary);
+}
+
+/* Estilos específicos para la lista de enfoques terapéuticos */
+.enfoques-list {
+    list-style: none; /* Elimina los bullets por defecto */
+    padding: 0;
+    margin-top: 30px;
+}
+
+.enfoques-list li {
+    display: flex;
+    align-items: flex-start; /* Alinea los ítems al inicio */
+    margin-bottom: 25px;
+    gap: 15px;
+    text-align: left; /* Asegura la alineación de texto a la izquierda */
+}
+
+.enfoques-list .icon-bullet {
+    font-size: 2em; /* Tamaño del ícono */
+    color: var(--color-secondary);
+    min-width: 40px; /* Ancho fijo para el ícono para mantener alineación */
+    text-align: center; /* Centra el ícono */
+    line-height: 1; /* Ajusta la altura de línea para que el ícono no ocupe demasiado espacio vertical */
+    padding-top: 5px; /* Pequeño ajuste para alinear con la primera línea de texto */
+}
+
+.enfoques-list .text-content {
+    flex-grow: 1;
+}
+
+.enfoques-list .text-content h4 {
+    font-size: 1.2em;
+    color: var(--color-primary);
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-family: var(--font-heading);
+    text-align: left; /* Asegura la alineación de texto a la izquierda */
+}
+
+.enfoques-list .text-content p {
+    font-size: 1em;
+    line-height: 1.6;
+    text-align: left; /* Asegura la alineación de texto a la izquierda */
+    margin-bottom: 0; /* Elimina margen inferior extra */
+}
+
+
+/* Columna derecha: Formulario de contacto (sidebar) */
+.services-sidebar-form {
+    position: static; /* Por defecto no sticky en móvil */
+    width: 100%; /* Ocupa todo el ancho en móvil */
+    min-width: unset;
+    max-width: unset;
+    margin: 0;
+    padding: 20px; /* Este padding está bien para móvil */
+    background-color: var(--color-background-gray); /* Usar la variable definida */
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 8px 20px var(--color-shadow-medium);
+    margin-top: 30px; /* Margen superior para separarlo del contenido principal en móvil */
+}
+
+/* Ajustes para el botón "Volver a la página principal" */
+.back-to-home {
+    display: block;
+    width: fit-content;
+    margin: 60px auto 0 auto; /* Centrado horizontalmente */
+    padding: 12px 25px;
+    background-color: var(--color-accent);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px var(--color-shadow-light);
+}
+
+.back-to-home:hover {
+    background-color: var(--color-primary); /* Un tono oscuro para el hover */
+}
+
+
+/* =====================================================================
+    MEDIA QUERIES
+    (Organizados de mobile-first a desktop)
+    ===================================================================== */
+
+/* Estilos para Mobile (hasta 767px) - Estos son los estilos base */
+@media (max-width: 767px) {
+    header {
+        flex-direction: row; /* Header en una fila con toggle */
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+    }
+
+    .logo {
+        height: 45px;
+        width: 45px;
+    }
+
+    .texto-header .firma {
+        font-size: 1.1em;
+    }
+
+    .menu-toggle {
+        display: block; /* Muestra el icono de hamburguesa */
+        font-size: 1.6em;
+    }
+
+    .header-bottom {
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: var(--header-height-mobile); /* Usar la variable para la altura del header */
+        left: 0;
+        background-color: var(--color-primary);
+        padding: 20px 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        box-shadow: 0 5px 15px var(--color-shadow-strong);
+        max-height: 0; /* Para la transición de altura */
+        overflow: hidden;
+    }
+
+    .header-bottom.is-open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        max-height: 500px; /* Suficiente altura para mostrar el menú */
+        transition: opacity 0.3s ease-out, visibility 0.3s ease-out, transform 0.3s ease-out, max-height 0.5s ease-out;
+    }
+
+    .header-bottom nav {
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .header-bottom nav a {
+        padding: 12px 0;
+        width: 100%;
+        display: block;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 1em;
+    }
+
+    .header-bottom nav a:last-child {
+        border-bottom: none;
+    }
+
+    .social-icons-header {
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .social-icons-header a {
+        margin: 0 10px;
+        font-size: 1.3em;
+    }
+
+    section {
+        padding: 40px 15px; /* Padding reducido para móviles */
+    }
+
+    #INICIO {
+        min-height: calc(100vh - var(--header-height-mobile)); /* Ajusta para el header móvil */
+    }
+
+    #INICIO h2 {
+        font-size: 2em;
+        margin-bottom: 25px
+    }
+    #INICIO p {
+        font-size: 1em;
+    }
+
+    /* ACERCA DE MI */
+    #ACERCA-DE-MI h2 {
+        font-size: 2.8em;
+    }
+    .about-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 15px; /* Ajusta el padding interno */
+        gap: 20px;
+    }
+    .about-image {
+        max-width: 200px;
+        margin-top: 0; /* No sobresale en móvil */
+    }
+    .about-image img {
+        margin-top: 0;
+        box-shadow: none; /* Sin sombra en móvil para la imagen */
+    }
+    .about-content-text {
+        text-align: center;
+        min-width: auto;
+        padding-top: 0; /* Sin padding extra en el texto */
+    }
+    .about-content-text h2 {
+        font-size: 1.8em;
+    }
+    .bullet-item {
+        gap: 10px; /* Reduce el espacio en los bullets */
+    }
+    .bullet-item .icon {
+        font-size: 1.8em;
+        min-width: 30px;
+    }
+    .bullet-details .bullet-title {
+        font-size: 1.1em;
+    }
+    .logos-acreditaciones {
+        gap: 20px;
+    }
+    .logo-acreditacion {
+        height: 80px;
+    }
+
+    /* SERVICIOS-MAIN (Grid de servicios) */
+    .services-title, #BLOG h2, #TESTIMONIOS h2, #CONTACTO h2 {
+        font-size: 2.2em;
+    }
+    .services-intro-paragraph {
+        font-size: 1.1em;
+    }
+    .services-grid-container {
+        grid-template-columns: 1fr; /* Una sola columna en móvil */
+        gap: 20px;
+        padding: 0;
+    }
+    .service-subsection {
+        padding: 20px; /* Reduce el padding de las tarjetas de servicio */
+    }
+
+    /* SERVICIOS.HTML DETALLE */
+    .services-page-main {
+        padding: 40px 15px; /* Ajusta el padding principal de la página */
+    }
+    .services-layout-container {
+        padding: 0; /* Ya el padre tiene padding */
+    }
+    .services-content-wrapper {
+        padding: 20px 15px; /* Ajusta el padding del contenido principal */
+    }
+    .services-content-wrapper .page-main-title {
+        font-size: 2.2em; /* Ajusta el tamaño del título de la página de servicios */
+        margin-bottom: 20px;
+    }
+    .services-banner-image {
+        margin-bottom: 20px; /* Reduce el margen inferior */
+    }
+    .service-detail-section h2 {
+        font-size: 1.8em;
+        margin-top: 30px;
+    }
+    .warning-box {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+    /* Asegura que todos los textos internos en servicios.html estén justificados */
+    .service-detail-section h3,
+    .service-detail-section p,
+    .service-detail-section ul,
+    .service-detail-section ol,
+    .service-detail-section .modalidades-tarifas h4,
+    .service-detail-section .warning-box {
+        text-align: justify;
+    }
+
+    /* Asegura que los enfoques también se justifiquen bien */
+    .enfoques-list li {
+        text-align: justify; /* Mantiene la justificación para el contenedor de la lista de enfoques */
+    }
+    .enfoques-list .text-content p {
+        text-align: justify; /* Asegura la justificación para el párrafo dentro del enfoque */
+    }
+}
+
+/* Estilos para Tablet/Desktop (a partir de 768px) */
+@media (min-width: 768px) {
+    header {
+        flex-direction: row; /* Vuelve a la fila para desktop */
+        justify-content: space-between;
+        padding: 15px 40px; /* Mayor padding en desktop */
+    }
+
+    .logo {
+        height: 60px;
+        width: 60px;
+    }
+
+    .texto-header .firma {
+        font-size: 1.8em;
+    }
+
+    .menu-toggle {
+        display: none; /* Oculta el icono de hamburguesa */
+    }
+
+    .header-bottom {
+        position: static; /* No posicionado */
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        max-height: none;
+        overflow: visible;
+        background-color: transparent; /* Transparente para no superponer */
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .header-bottom nav {
+        flex-direction: row;
+        width: auto;
+        text-align: left;
+        margin-bottom: 0;
+    }
+
+    .header-bottom nav ul { /* Añadido para desktop para el nav */
+        display: flex;
+        justify-content: center; /* Centra los elementos del nav */
+        width: 100%; /* Asegura que la lista ocupe el ancho disponible */
+    }
+
+    .header-bottom nav a {
+        padding: 10px 15px;
+        width: auto;
+        border-bottom: none;
+    }
+
+    .social-icons-header {
+        width: auto;
+        text-align: right;
+        margin-top: 0;
+    }
+
+    /* Ajuste de altura de INICIO para desktop */
+    #INICIO {
+        min-height: calc(100vh - var(--header-height-desktop));
+    }
+
+    /* ACERCA DE MI - Ajustes para desktop */
+    #ACERCA-DE-MI h2 {
+        font-size: 3.5em;
+    }
+    .about-image {
+        margin-bottom: 0px; /* No sobresale en desktop, ya es parte del diseño */
+    }
+
+    /* SERVICIOS.HTML - Layout de dos columnas y Sticky Sidebar */
+    .services-layout-container {
+        flex-direction: row; /* Dos columnas */
+        align-items: flex-start; /* Alinea los elementos al inicio */
+        padding: 40px 0; /* Padding dentro del layout, el principal ya tiene */
+    }
+
+    .services-content-wrapper {
+        flex: 3; /* Más espacio para el contenido principal */
+        max-width: 70%; /* Límite para el contenido principal */
+        position: static; /* Asegura que no haya posiciones que interfieran */
+    }
+
+    .services-sidebar-form {
+        flex: 0 0 380px; /* Ancho fijo para el sidebar */
+        width: 380px; /* Asegura el ancho fijo */
+        min-width: 320px;
+        max-width: 450px;
+        /* IMPORTANTE: Comentado o eliminado si causan problemas con sticky
+           max-height: none; 
+           overflow-y: visible; */
+        padding: 15px; /* Reduce el padding del contenedor del formulario */
+        position: sticky; /* Hace el elemento sticky */
+        top: 20px; /* Distancia desde la parte superior de la ventana */
+        align-self: flex-start; /* Alinea al inicio en el contenedor flex */
+        background-color: var(--color-background-gray);
+        z-index: 10;
+        margin-left: 30px; /* Espacio entre el contenido principal y la barra lateral */
+        margin-top: 0; /* Elimina el margen superior que tenía en móvil */
+    }
+
+    /* Ajustes para los elementos INTERNOS del formulario (para reducir altura) */
+    .services-sidebar-form .contact-form-card {
+        padding: 15px; /* Padding interno de la tarjeta del formulario */
+        box-shadow: none; /* Podrías quitar la sombra si ya está en .services-sidebar-form */
+    }
+
+    .services-sidebar-form .contact-form-card h3 {
+        font-size: 1.3em; /* Tamaño de fuente más pequeño para el título */
+        margin-bottom: 10px; /* Menor margen inferior del título */
+    }
+
+    .services-sidebar-form .form-group {
+        margin-bottom: 12px; /* Reducir el espacio entre campos */
+    }
+
+    .services-sidebar-form .form-group label {
+        font-size: 0.85em; /* Tamaño de fuente más pequeño para las etiquetas */
+        margin-bottom: 5px;
+    }
+
+    .services-sidebar-form input[type="text"],
+    .services-sidebar-form input[type="email"],
+    .services-sidebar-form textarea {
+        padding: 8px 10px; /* Padding reducido para los inputs */
+        font-size: 0.9em; /* Tamaño de fuente más pequeño para el texto de entrada */
+    }
+
+    .services-sidebar-form textarea {
+        min-height: 70px; /* Altura mínima del textarea (¡crucial!) */
+        resize: vertical; /* Permitir solo redimensionamiento vertical si es necesario */
+    }
+
+    .services-sidebar-form .boton {
+        padding: 10px 20px; /* Padding del botón */
+        font-size: 0.9em; /* Tamaño de fuente del botón */
+        margin-top: 10px;
+    }
+
+    /* Asegura que los enfoques se mantengan alineados y justificados en desktop */
+    .enfoques-list li {
+        text-align: left; /* Mantener la alineación a la izquierda para desktop */
+    }
+    .enfoques-list .text-content p {
+        text-align: justify; /* Mantener la justificación para el párrafo de desktop */
+    }
+}
