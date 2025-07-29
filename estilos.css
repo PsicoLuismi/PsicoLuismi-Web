@@ -9,15 +9,10 @@
     --color-text-light: #f8f5ed;
     --color-bg-light: #f8f5ed;
     --color-bg-very-light: #fffeeb;
-    --color-shadow-light: rgba(0, 0, 0, 0.1);
-    --color-shadow-medium: rgba(0, 0, 0, 0.15);
-    --color-shadow-strong: rgba(0, 0, 0, 0.2);
-    --color-background-gray: #f2f2f2; /* Definido el color gris para el sidebar */
+    --color-shadow: rgba(0, 0, 0, 0.1);
     --font-heading: 'Georgia', serif;
     --font-body: 'Arial', sans-serif;
     --border-radius-card: 15px;
-    --header-height-mobile: 80px; /* Altura aproximada del header en móvil */
-    --header-height-desktop: 100px; /* Altura aproximada del header en desktop */
 }
 
 /* Declaración @font-face para AmsterdamOne */
@@ -45,24 +40,24 @@ body {
     line-height: 1.6;
     color: var(--color-text-dark);
     background-color: var(--color-bg-light);
-    overflow-x: hidden; /* Previene el scroll horizontal */
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 /* ===================================== */
 /* LAYOUT PRINCIPAL Y SECCIONES SPA */
 /* ===================================== */
 
-/* Oculta las secciones por defecto. La transición se aplicará cuando se cambie la opacidad. */
 .section-hidden {
-    display: none; /* Se cambia con JS */
+    display: none !important;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
-/* Muestra las secciones activas. */
 .is-active {
-    display: block; /* Se cambia con JS */
+    display: block !important;
     opacity: 1;
     visibility: visible;
 }
@@ -71,115 +66,14 @@ section {
     padding: 60px 20px;
     margin: 0;
     width: 100%;
+    min-height: auto;
     box-sizing: border-box;
 }
 
-/* ===================================== */
-/* HEADER Y NAVEGACIÓN */
-/* ===================================== */
-header {
-    background-color: var(--color-primary);
-    color: #fff;
-    padding: 15px 20px;
-    display: flex;
-    flex-direction: column; /* Por defecto en móvil */
-    align-items: flex-start;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    position: relative;
-    z-index: 1000;
-    box-shadow: 0 2px 10px var(--color-shadow-light);
-    width: 100%;
-}
-
-.header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.logo {
-    height: 60px;
-    width: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.texto-header .firma {
-    font-family: 'AmsterdamOne', var(--font-heading), serif;
-    font-size: 1.8em;
-    margin: 0;
-    color: var(--color-bg-very-light);
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden; /* Asegura que ellipsis funcione */
-    max-width: 100%; /* Limita el ancho para el ellipsis */
-}
-
-.menu-toggle {
-    display: none; /* Oculto por defecto en desktop */
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 1.8em;
-    cursor: pointer;
-    padding: 6px;
-    transition: color 0.3s ease;
-}
-
-.menu-toggle:hover {
-    color: var(--color-secondary);
-}
-
-.header-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-}
-
-.header-bottom nav a {
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 15px;
-    transition: color 0.3s ease, background-color 0.3s ease;
-    font-weight: bold;
-    font-size: 1.1em;
-}
-
-.header-bottom nav a:hover {
-    color: var(--color-secondary);
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-}
-
-.social-icons-header a {
-    color: #fff;
-    font-size: 1.5em;
-    margin-left: 15px;
-    transition: color 0.3s ease;
-}
-
-.social-icons-header a:hover {
-    color: var(--color-secondary);
-}
-
-/* ===================================== */
-/* SECCIÓN INICIO */
-/* ===================================== */
 #INICIO {
     background-color: var(--color-bg-very-light);
     color: var(--color-text-dark);
-    min-height: calc(100vh - var(--header-height-desktop)); /* Usa variable para altura del header */
+    min-height: calc(100vh - 80px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -217,11 +111,11 @@ header {
     font-weight: bold;
     font-size: 1.1em;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 10px var(--color-shadow-light);
+    box-shadow: 0 4px 10px var(--color-shadow);
 }
 
 .agenda-btn:hover {
-    background-color: #00a71c; /* Un verde vibrante para "agendar" */
+    background-color: #00a71c;
     transform: translateY(-3px);
 }
 
@@ -235,6 +129,117 @@ header {
 .internal-section-link:hover {
     color: var(--color-accent);
 }
+
+/* ===================================== */
+/* HEADER Y NAVEGACIÓN */
+/* ===================================== */
+header {
+    background-color: var(--color-primary);
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1000;
+    box-shadow: 0 2px 10px var(--color-shadow);
+    width: 100%;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.logo {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+
+.texto-header .firma {
+    font-family: 'AmsterdamOne', var(--font-heading), serif;
+    font-size: 1.8em;
+    margin: 0;
+    color: var(--color-bg-very-light);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.8em;
+    cursor: pointer;
+    padding: 6px;
+}
+
+/* Asegúrate de que esta media query está debajo de los estilos generales del header */
+@media (max-width: 768px) {
+    header {
+        padding: 10px 15px; /* Más estrecho el padding para pantallas pequeñas */
+    }
+
+    .logo {
+        height: 50px; /* Reduce aún más el logo en pantallas muy pequeñas */
+        width: 50px;
+    }
+
+    .texto-header .firma {
+        font-size: 1.2em; /* Ajusta aún más el tamaño de la firma si es necesario */
+    }
+}
+
+.header-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.header-bottom nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.header-bottom nav a:hover {
+    color: var(--color-secondary);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.social-icons-header a {
+    color: #fff;
+    font-size: 1.5em;
+    margin-left: 15px;
+    transition: color 0.3s ease;
+}
+
+.social-icons-header a:hover {
+    color: var(--color-secondary);
+}
+
 
 /* ===================================== */
 /* SECCIÓN ACERCA DE MI */
@@ -262,8 +267,9 @@ header {
     margin: 0 auto;
     background-color: #fff;
     border-radius: var(--border-radius-card);
-    padding: 0 15px; /* Padding ajustado, la imagen sobresale del top */
-    box-shadow: 0 8px 20px var(--color-shadow-medium);
+    padding: 20px; /* Base padding for all sizes */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para el recuadro */
+    box-sizing: border-box; /* Crucial for responsive widths with padding */
 }
 
 .about-image {
@@ -279,17 +285,14 @@ header {
     border-radius: var(--border-radius-card);
     object-fit: cover;
     display: block;
-    margin: 0 auto;
-    margin-top: -80px; /* Ajusta este valor para que la imagen sobresalga del contenedor */
-    box-shadow: 0 8px 20px var(--color-shadow-medium); /* Añade sombra a la imagen también */
+    margin: 0 auto; /* Centrar la imagen por defecto */
+    margin-top: 100px;
 }
 
 .about-content-text {
     flex: 2;
     min-width: 300px;
-    text-align: justify;
-    padding-top: 30px; /* Añade padding-top para el contenido de texto */
-    padding-bottom: 30px;
+    text-align: justify; /* Mantiene justificado en escritorio */
 }
 
 .about-content-text h2 {
@@ -303,6 +306,8 @@ header {
     font-size: 1.1em;
     margin-bottom: 20px;
     line-height: 1.7;
+    word-wrap: break-word; /* Asegura que las palabras largas se rompan */
+    word-break: break-word; /* Para mayor compatibilidad */
 }
 
 .about-bullets {
@@ -342,47 +347,70 @@ header {
 /* SECCIÓN MI FORMACIÓN Y ACREDITACIONES */
 /* ================================================================= */
 .formacion-acreditaciones-container {
+    background-color: #ffffff; /* Fondo blanco para el cuadro*/
     text-align: center;
     margin-top: 80px;
-    background-color: var(--color-bg-very-light);
-    padding: 40px 20px;
-    border-radius: var(--border-radius-card);
-    box-shadow: 0 4px 15px var(--color-shadow-light);
+    padding: 40px 20px; /* Padding interno para el contenido dentro del cuadro*/
+    border-radius: var(--border-radius-card); /* Esquinas redondeadas*/
+    box-shadow: 0 4px 15px var(--color-shadow); /* Sombra para darle profundidad, como en 'Acerca de Mí'*/
+    max-width: 90%; /* Ajusta este valor para el ancho del cuadro en pantallas grandes*/
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .formacion-acreditaciones-container h3 {
     font-size: 2em;
     color: var(--color-primary);
-    margin-bottom: 40px;
+    margin-bottom: 40px; /* Espacio entre el título y los logos */
     font-family: var(--font-heading);
+    word-wrap: break-word;
+    hyphens: auto;
 }
 
 .logos-acreditaciones {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 30px;
-    max-width: 1000px;
-    margin: 0 auto;
+    gap: 20px;
+    padding: 0;
 }
 
 .logo-acreditacion {
-    height: 100px;
+    height: auto;
     width: auto;
+    max-width: 75%; /* Ajusta el tamaño de los logos */
     object-fit: contain;
-    transition: transform 0.3s ease;
+    margin-bottom: 15px;
 }
 
 .logo-acreditacion:hover {
     transform: scale(1.05);
 }
 
+/* Media Query para pantallas pequeñas */
+@media (max-width: 768px) {
+    .formacion-acreditaciones-container {
+        padding: 30px 15px; /* Ajusta el padding para móviles*/
+        margin-top: 60px;
+        max-width: 95%; /* Puedes hacerlo un poco más ancho en móviles para aprovechar el espacio*/
+    }
+
+    .formacion-acreditaciones-container h3 {
+        font-size: 1.8em;
+        margin-bottom: 30px;
+    }
+
+    .logo-acreditacion {
+        max-width: 85%; /* Podrías probar con 90% o 95% si quieres que los logos sean más grandes y ocupen casi todo el ancho */
+        margin-bottom: 20px;
+    }
+}
 
 /* ===================================== */
 /* SECCIÓN SERVICIOS-MAIN (Overview) */
 /* ===================================== */
 #SERVICIOS-MAIN {
-    background-color: #e6eef5; /* Un tono de azul más claro */
+    background-color: #e6eef5;
     text-align: center;
     padding: 80px 40px;
 }
@@ -416,7 +444,7 @@ header {
 .service-subsection {
     background-color: #fff;
     border-radius: var(--border-radius-card);
-    box-shadow: 0 8px 20px var(--color-shadow-medium);
+    box-shadow: 0 8px 20px var(--color-shadow);
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -426,7 +454,7 @@ header {
 
 .service-subsection:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 25px var(--color-shadow-strong);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
 }
 
 .service-image-placeholder {
@@ -440,6 +468,7 @@ header {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+
 }
 
 .service-text {
@@ -473,7 +502,7 @@ header {
 }
 
 .btn-saber-mas:hover {
-    background-color: var(--color-primary); /* Cambiado a color primario oscuro */
+    background-color: #0e0252;
 }
 
 
@@ -531,7 +560,7 @@ header {
     color: var(--color-text-dark);
     padding: 30px;
     border-radius: var(--border-radius-card);
-    box-shadow: 0 8px 20px var(--color-shadow-strong); /* Sombra más fuerte */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     text-align: left;
 }
 
@@ -580,7 +609,7 @@ header {
     background-color: #fff;
     padding: 25px;
     border-radius: var(--border-radius-card);
-    box-shadow: 0 8px 20px var(--color-shadow-medium);
+    box-shadow: 0 8px 20px var(--color-shadow);
     text-align: left;
 }
 
@@ -666,17 +695,17 @@ header {
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 10px var(--color-shadow-light);
+    box-shadow: 0 4px 10px var(--color-shadow);
 }
 
 .boton:hover {
-    background-color: #003366; /* Un tono más oscuro de primary */
+    background-color: #003366;
     transform: translateY(-3px);
 }
 
 .map-responsive {
     overflow: hidden;
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    padding-bottom: 56.25%;
     position: relative;
     height: 0;
     margin-top: 20px;
@@ -705,7 +734,7 @@ footer {
 }
 
 /* ===================================== */
-/* ESTILOS ESPECÍFICOS PARA servicios.html */
+/* ESTILOS ESPECÍFICOS PARA servicios.html (NUEVAS REGLAS AQUÍ) */
 /* ===================================== */
 
 /* Contenedor principal de la página de servicios para padding y background */
@@ -717,47 +746,48 @@ footer {
     align-items: center;
 }
 
-/* Contenedor Flex para las dos columnas (mobile-first: columna por defecto) */
+/* Contenedor Flex para las dos columnas */
 .services-layout-container {
     display: flex;
-    flex-direction: column; /* Columna por defecto en móvil */
+    flex-wrap: wrap;
     gap: 30px;
     max-width: 100%;
     width: 100%;
     margin: 0 auto;
     align-items: flex-start;
-    padding: 0 15px; /* Padding para el contenido dentro del layout */
+    padding: 0 15px;
+    flex-direction: column
 }
 
 /* Columna izquierda: Contenido de los servicios */
 .services-content-wrapper {
-    flex: 1; /* Permite que ocupe el espacio disponible en móvil */
+    flex: 3;
     min-width: unset;
     background-color: #fff;
     padding: 20px;
     border-radius: var(--border-radius-card);
-    box-shadow: 0 8px 20px var(--color-shadow-medium);
+    box-shadow: 0 8px 20px var(--color-shadow);
     width: 100%;
 }
 
 .services-content-wrapper .page-main-title {
     font-size: 3.5em;
     color: var(--color-primary);
-    margin-bottom: 40px;
+    margin-bottom: 40px; /* Ajustado el margen inferior para dar espacio a la imagen */
     font-family: var(--font-heading);
     text-align: center;
 }
 
 /* Estilos para la imagen debajo del título de servicios */
 .services-banner-image {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    display: block;
-    margin: 0 auto 40px auto;
-    border-radius: var(--border-radius-card);
-    box-shadow: 0 4px 15px var(--color-shadow-light);
-    object-fit: cover;
+    width: 100%; /* La imagen ocupará todo el ancho disponible de su contenedor */
+    max-width: 600px; /* Puedes ajustar esto para limitar el ancho máximo de la imagen */
+    height: auto; /* Mantiene la proporción de la imagen */
+    display: block; /* Para centrarla con margin auto */
+    margin: 0 auto 40px auto; /* Centrado horizontalmente, margen inferior */
+    border-radius: var(--border-radius-card); /* Aplica el mismo border-radius que las tarjetas */
+    box-shadow: 0 4px 15px var(--color-shadow); /* Añade una sombra sutil */
+    object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsionarse */
 }
 
 /* Ajustes para los títulos y listas dentro de service-detail-section */
@@ -836,392 +866,130 @@ footer {
     color: var(--color-primary);
 }
 
-/* Estilos específicos para la lista de enfoques terapéuticos */
-.enfoques-list {
-    list-style: none; /* Elimina los bullets por defecto */
-    padding: 0;
-    margin-top: 30px;
-}
 
-.enfoques-list li {
-    display: flex;
-    align-items: flex-start; /* Alinea los ítems al inicio */
-    margin-bottom: 25px;
-    gap: 15px;
-    text-align: left; /* Asegura la alineación de texto a la izquierda */
-}
-
-.enfoques-list .icon-bullet {
-    font-size: 2em; /* Tamaño del ícono */
-    color: var(--color-secondary);
-    min-width: 40px; /* Ancho fijo para el ícono para mantener alineación */
-    text-align: center; /* Centra el ícono */
-    line-height: 1; /* Ajusta la altura de línea para que el ícono no ocupe demasiado espacio vertical */
-    padding-top: 5px; /* Pequeño ajuste para alinear con la primera línea de texto */
-}
-
-.enfoques-list .text-content {
-    flex-grow: 1;
-}
-
-.enfoques-list .text-content h4 {
-    font-size: 1.2em;
-    color: var(--color-primary);
-    margin-top: 0;
-    margin-bottom: 5px;
-    font-family: var(--font-heading);
-    text-align: left; /* Asegura la alineación de texto a la izquierda */
-}
-
-.enfoques-list .text-content p {
-    font-size: 1em;
-    line-height: 1.6;
-    text-align: left; /* Asegura la alineación de texto a la izquierda */
-    margin-bottom: 0; /* Elimina margen inferior extra */
-}
-
-
-/* Columna derecha: Formulario de contacto (sidebar) */
+/* Columna derecha: Formulario de contacto */
 .services-sidebar-form {
-    position: static; /* Por defecto no sticky en móvil */
-    width: 100%; /* Ocupa todo el ancho en móvil */
+    position: static; /* Asegura que el formulario no sea sticky en móvil */
+    width: 100%; /* Asegura que ocupe todo el ancho en móvil */
     min-width: unset;
     max-width: unset;
-    margin: 0;
-    padding: 20px; /* Este padding está bien para móvil */
-    background-color: var(--color-background-gray); /* Usar la variable definida */
-    border-radius: var(--border-radius-card);
-    box-shadow: 0 8px 20px var(--color-shadow-medium);
-    margin-top: 30px; /* Margen superior para separarlo del contenido principal en móvil */
+    margin: 0; /* Elimina márgenes extra */
+    padding: 20px; /* Ajusta el padding interno del formulario */
+    background-color: var(--color-bg-light); /* Usar una variable existente para el fondo si aplica */
+    border-radius: var(--border-radius-card); /* Aplica el mismo border-radius */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Ajustes para el botón "Volver a la página principal" */
+/* Asegura que el enlace de volver a la página principal esté centrado y abajo */
 .back-to-home {
     display: block;
     width: fit-content;
-    margin: 60px auto 0 auto; /* Centrado horizontalmente */
+    margin: 60px auto 0 auto;
     padding: 12px 25px;
     background-color: var(--color-accent);
     color: #fff;
     text-decoration: none;
     border-radius: 25px;
     font-weight: bold;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 10px var(--color-shadow-light);
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px var(--color-shadow);
 }
 
 .back-to-home:hover {
-    background-color: var(--color-primary); /* Un tono oscuro para el hover */
+    background-color: #003366;
 }
 
 
 /* =====================================================================
-    MEDIA QUERIES
-    (Organizados de mobile-first a desktop)
+    PÁGINA DE SERVICIOS (servicios.html) - Ajustes y Sticky Sidebar
     ===================================================================== */
 
-/* Estilos para Mobile (hasta 767px) - Estos son los estilos base */
-@media (max-width: 767px) {
-    header {
-        flex-direction: row; /* Header en una fila con toggle */
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 20px;
-    }
-
-    .logo {
-        height: 45px;
-        width: 45px;
-    }
-
-    .texto-header .firma {
-        font-size: 1.1em;
-    }
-
-    .menu-toggle {
-        display: block; /* Muestra el icono de hamburguesa */
-        font-size: 1.6em;
-    }
-
-    .header-bottom {
-        flex-direction: column;
-        width: 100%;
-        position: absolute;
-        top: var(--header-height-mobile); /* Usar la variable para la altura del header */
-        left: 0;
-        background-color: var(--color-primary);
-        padding: 20px 0;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-20px);
-        box-shadow: 0 5px 15px var(--color-shadow-strong);
-        max-height: 0; /* Para la transición de altura */
-        overflow: hidden;
-    }
-
-    .header-bottom.is-open {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-        max-height: 500px; /* Suficiente altura para mostrar el menú */
-        transition: opacity 0.3s ease-out, visibility 0.3s ease-out, transform 0.3s ease-out, max-height 0.5s ease-out;
-    }
-
-    .header-bottom nav {
-        flex-direction: column;
-        width: 100%;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .header-bottom nav a {
-        padding: 12px 0;
-        width: 100%;
-        display: block;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        font-size: 1em;
-    }
-
-    .header-bottom nav a:last-child {
-        border-bottom: none;
-    }
-
-    .social-icons-header {
-        width: 100%;
-        text-align: center;
-        margin-top: 10px;
-    }
-
-    .social-icons-header a {
-        margin: 0 10px;
-        font-size: 1.3em;
-    }
-
-    section {
-        padding: 40px 15px; /* Padding reducido para móviles */
-    }
-
-    #INICIO {
-        min-height: calc(100vh - var(--header-height-mobile)); /* Ajusta para el header móvil */
-    }
-
-    #INICIO h2 {
-        font-size: 2em;
-        margin-bottom: 25px
-    }
-    #INICIO p {
-        font-size: 1em;
-    }
-
-    /* ACERCA DE MI */
-    #ACERCA-DE-MI h2 {
-        font-size: 2.8em;
-    }
-    .about-container {
-        flex-direction: column;
-        align-items: center;
-        padding: 20px 15px; /* Ajusta el padding interno */
-        gap: 20px;
-    }
-    .about-image {
-        max-width: 200px;
-        margin-top: 0; /* No sobresale en móvil */
-    }
-    .about-image img {
-        margin-top: 0;
-        box-shadow: none; /* Sin sombra en móvil para la imagen */
-    }
-    .about-content-text {
-        text-align: center;
-        min-width: auto;
-        padding-top: 0; /* Sin padding extra en el texto */
-    }
-    .about-content-text h2 {
-        font-size: 1.8em;
-    }
-    .bullet-item {
-        gap: 10px; /* Reduce el espacio en los bullets */
-    }
-    .bullet-item .icon {
-        font-size: 1.8em;
-        min-width: 30px;
-    }
-    .bullet-details .bullet-title {
-        font-size: 1.1em;
-    }
-    .logos-acreditaciones {
-        gap: 20px;
-    }
-    .logo-acreditacion {
-        height: 80px;
-    }
-
-    /* SERVICIOS-MAIN (Grid de servicios) */
-    .services-title, #BLOG h2, #TESTIMONIOS h2, #CONTACTO h2 {
-        font-size: 2.2em;
-    }
-    .services-intro-paragraph {
-        font-size: 1.1em;
-    }
-    .services-grid-container {
-        grid-template-columns: 1fr; /* Una sola columna en móvil */
-        gap: 20px;
-        padding: 0;
-    }
-    .service-subsection {
-        padding: 20px; /* Reduce el padding de las tarjetas de servicio */
-    }
-
-    /* SERVICIOS.HTML DETALLE */
-    .services-page-main {
-        padding: 40px 15px; /* Ajusta el padding principal de la página */
-    }
-    .services-layout-container {
-        padding: 0; /* Ya el padre tiene padding */
-    }
-    .services-content-wrapper {
-        padding: 20px 15px; /* Ajusta el padding del contenido principal */
-    }
-    .services-content-wrapper .page-main-title {
-        font-size: 2.2em; /* Ajusta el tamaño del título de la página de servicios */
-        margin-bottom: 20px;
-    }
-    .services-banner-image {
-        margin-bottom: 20px; /* Reduce el margen inferior */
-    }
-    .service-detail-section h2 {
-        font-size: 1.8em;
-        margin-top: 30px;
-    }
-    .warning-box {
-        padding: 10px 15px;
-        font-size: 0.9em;
-    }
-    /* Asegura que todos los textos internos en servicios.html estén justificados */
-    .service-detail-section h3,
-    .service-detail-section p,
-    .service-detail-section ul,
-    .service-detail-section ol,
-    .service-detail-section .modalidades-tarifas h4,
-    .service-detail-section .warning-box {
-        text-align: justify;
-    }
-
-    /* Asegura que los enfoques también se justifiquen bien */
-    .enfoques-list li {
-        text-align: justify; /* Mantiene la justificación para el contenedor de la lista de enfoques */
-    }
-    .enfoques-list .text-content p {
-        text-align: justify; /* Asegura la justificación para el párrafo dentro del enfoque */
-    }
+/* ESTILOS BASE PARA MÓVILES (Menos de 768px - Mobile-First) */
+/* Los estilos aquí son la base para pantallas pequeñas */
+.services-layout-container {
+    flex-direction: column; /* Por defecto, una columna */
+    gap: 30px;
+    padding: 0;
 }
 
-/* Estilos para Tablet/Desktop (a partir de 768px) */
-@media (min-width: 768px) {
-    header {
-        flex-direction: row; /* Vuelve a la fila para desktop */
-        justify-content: space-between;
-        padding: 15px 40px; /* Mayor padding en desktop */
-    }
+.services-sidebar-form {
+    position: static; /* NO sticky en móvil por defecto */
+    margin-top: 30px;
+    margin-left: 0;
+    max-height: none; /* Sin límite de altura */
+    overflow-y: visible; /* Sin scroll interno */
+    /* background-color ya definido arriba */
+    padding: 20px; /* Padding para móvil */
+    /* border-radius y box-shadow ya definidos arriba */
+    width: auto; /* Ancho automático para móvil */
+    min-width: auto;
+    max-width: none;
+}
 
-    .logo {
-        height: 60px;
-        width: 60px;
-    }
+/* Ajustes para elementos dentro del formulario en móvil, si aplica */
+.services-sidebar-form .contact-form-card {
+    padding: 20px;
+}
+.services-sidebar-form .contact-form-card h3 {
+    font-size: 1.5em; /* Tamaño de fuente para móvil */
+    margin-bottom: 20px;
+}
+.services-sidebar-form .form-group {
+    margin-bottom: 20px;
+}
+.services-sidebar-form input,
+.services-sidebar-form textarea {
+    padding: 12px; /* Padding para inputs en móvil */
+    font-size: 1em;
+}
+.services-sidebar-form textarea {
+    min-height: 120px; /* Altura mínima del textarea en móvil */
+}
+.services-sidebar-form .boton {
+    padding: 12px 25px;
+    font-size: 1em;
+}
 
-    .texto-header .firma {
-        font-size: 1.8em;
-    }
 
-    .menu-toggle {
-        display: none; /* Oculta el icono de hamburguesa */
-    }
-
-    .header-bottom {
-        position: static; /* No posicionado */
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        max-height: none;
-        overflow: visible;
-        background-color: transparent; /* Transparente para no superponer */
-        box-shadow: none;
-        padding: 0;
-    }
-
-    .header-bottom nav {
-        flex-direction: row;
-        width: auto;
-        text-align: left;
-        margin-bottom: 0;
-    }
-
-    .header-bottom nav ul { /* Añadido para desktop para el nav */
-        display: flex;
-        justify-content: center; /* Centra los elementos del nav */
-        width: 100%; /* Asegura que la lista ocupe el ancho disponible */
-    }
-
-    .header-bottom nav a {
-        padding: 10px 15px;
-        width: auto;
-        border-bottom: none;
-    }
-
-    .social-icons-header {
-        width: auto;
-        text-align: right;
-        margin-top: 0;
-    }
-
-    /* Ajuste de altura de INICIO para desktop */
-    #INICIO {
-        min-height: calc(100vh - var(--header-height-desktop));
-    }
-
-    /* ACERCA DE MI - Ajustes para desktop */
-    #ACERCA-DE-MI h2 {
-        font-size: 3.5em;
-    }
-    .about-image {
-        margin-bottom: 0px; /* No sobresale en desktop, ya es parte del diseño */
-    }
-
-    /* SERVICIOS.HTML - Layout de dos columnas y Sticky Sidebar */
+/* ---------------------------------------------------------------------------------- */
+/* MEDIA QUERY PARA TABLETS y ESCRITORIOS PEQUEÑOS (Más de 768px) */
+/* Aquí definimos el comportamiento de dos columnas y el sticky sidebar */
+@media (min-width: 769px) { /* Cambiado de 768px a 769px para evitar solapamiento */
     .services-layout-container {
         flex-direction: row; /* Dos columnas */
         align-items: flex-start; /* Alinea los elementos al inicio */
-        padding: 40px 0; /* Padding dentro del layout, el principal ya tiene */
+        padding: 40px 0;
+        max-width: 1200px; /* Límite para el ancho del contenedor principal */
     }
 
     .services-content-wrapper {
-        flex: 3; /* Más espacio para el contenido principal */
-        max-width: 70%; /* Límite para el contenido principal */
-        position: static; /* Asegura que no haya posiciones que interfieran */
+        flex: 3;
+        max-width: 70%; /* Aproximadamente 70% del ancho del layout-container */
+        position: static; /* Asegura que no sea sticky */
     }
 
     .services-sidebar-form {
-        flex: 0 0 380px; /* Ancho fijo para el sidebar */
-        width: 380px; /* Asegura el ancho fijo */
-        min-width: 320px;
-        max-width: 450px;
-        /* IMPORTANTE: Comentado o eliminado si causan problemas con sticky
-           max-height: none; 
-           overflow-y: visible; */
-        padding: 15px; /* Reduce el padding del contenedor del formulario */
-        position: sticky; /* Hace el elemento sticky */
-        top: 20px; /* Distancia desde la parte superior de la ventana */
+        flex: 0 0 380px; /* flex-grow: 0, flex-shrink: 0, flex-basis: 380px */
+        width: 380px; /* Ancho fijo para escritorio */
+        min-width: 320px; /* Un poco de flexibilidad para el ancho */
+        max-width: 450px; /* Límite superior para el ancho */
+
+        max-height: none; /* ¡CRUCIAL! Elimina cualquier límite de altura */
+        overflow-y: visible; /* ¡CRUCIAL! Evita el scroll interno */
+
+        padding: 15px; /* Padding ajustado para escritorio */
+
+        position: sticky; /* Hacemos el elemento sticky */
+        top: 20px; /* Distancia desde la parte superior de la ventana. */
         align-self: flex-start; /* Alinea al inicio en el contenedor flex */
-        background-color: var(--color-background-gray);
+        /* background-color, border-radius, box-shadow ya definidos arriba */
         z-index: 10;
         margin-left: 30px; /* Espacio entre el contenido principal y la barra lateral */
-        margin-top: 0; /* Elimina el margen superior que tenía en móvil */
     }
 
     /* Ajustes para los elementos INTERNOS del formulario (para reducir altura) */
     .services-sidebar-form .contact-form-card {
         padding: 15px; /* Padding interno de la tarjeta del formulario */
-        box-shadow: none; /* Podrías quitar la sombra si ya está en .services-sidebar-form */
     }
 
     .services-sidebar-form .contact-form-card h3 {
@@ -1255,12 +1023,249 @@ footer {
         font-size: 0.9em; /* Tamaño de fuente del botón */
         margin-top: 10px;
     }
+}
 
-    /* Asegura que los enfoques se mantengan alineados y justificados en desktop */
-    .enfoques-list li {
-        text-align: left; /* Mantener la alineación a la izquierda para desktop */
+
+/* ---------------------------------------------------------------------------------- */
+/* MEDIA QUERY PARA MÓVILES (Max-width: 768px - este es el que cubre tu imagen) */
+/* Este bloque consolida y ajusta los estilos para pantallas pequeñas */
+@media (max-width: 768px) {
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
     }
-    .enfoques-list .text-content p {
-        text-align: justify; /* Mantener la justificación para el párrafo de desktop */
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .header-bottom {
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: var(--color-primary);
+        padding: 20px 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        max-height: 0;
+        overflow: hidden;
+    }
+
+    .header-bottom.is-open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        max-height: 500px;
+        transition: opacity 0.3s ease-out, visibility 0.3s ease-out, transform 0.3s ease-out, max-height 0.5s ease-out;
+    }
+
+    .header-bottom nav {
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .header-bottom nav a {
+        padding: 12px 0;
+        width: 100%;
+        display: block;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .header-bottom nav a:last-child {
+        border-bottom: none;
+    }
+
+    .social-icons-header {
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .social-icons-header a {
+        margin: 0 10px;
+    }
+
+    section {
+        padding: 40px 15px;
+    }
+
+    #INICIO h2 {
+        font-size: 2em;
+        margin-bottom: 25px
+    }
+    #INICIO p {
+        font-size: 1em;
+    }
+
+    /* --- AJUSTES CLAVE PARA EL RECUADRO BLANCO (ACERCA DE MI) --- */
+    #ACERCA-DE-MI {
+         background-color: #ffffff;
+        padding: 40px 15px; /* Ajusta el padding de la sección en móvil */
+    }
+
+    .about-container {
+        flex-direction: column; /* Apila los elementos en columna */
+        align-items: center; /* Centra los elementos */
+        padding: 20px; /* Un padding interno más consistente para móvil */
+        width: 95%; /* *** CLAVE: Ocupa el 95% del ancho de la pantalla *** */
+        max-width: none; /* *** CLAVE: Permite que el 95% de ancho sea efectivo *** */
+        gap: 20px; /* Reduce el espacio entre la imagen y el texto */
+        /* box-sizing: border-box; ya está en el general reset */
+    }
+
+    .about-image {
+        max-width: 200px; /* Tamaño máximo para la imagen en móvil */
+        margin-bottom: 0px; /* Ajuste si necesitas espacio debajo de la imagen */
+    }
+    /* Eliminar el margin-top de la imagen en móvil para que no baje demasiado */
+    .about-image img {
+        margin-top: 50px;
+    }
+
+    .about-content-text {
+        text-align: justify; /* *** CLAVE: Justifica el texto principal para mejor apariencia *** */
+        min-width: auto;
+    }
+
+    .about-content-text h2 {
+        font-size: 1.8em; /* Ajusta el tamaño del título interno */
+        text-align: center; /* Centra el título "Soy Luis Miguel Carvajal" */
+    }
+
+    .about-content-text p {
+        font-size: 1em; /* Ajusta el tamaño del texto */
+        line-height: 1.6;
+    }
+
+    .bullet-item {
+        gap: 10px; /* Reduce el espacio en los bullets */
+    }
+    .bullet-item .icon {
+        font-size: 1.8em;
+        min-width: 30px;
+    }
+    .bullet-details .bullet-title {
+        font-size: 1.1em;
+    }
+
+    #ACERCA-DE-MI h2 {
+        font-size: 2.8em; /* El título principal de la sección */
+        margin-bottom: 20px; /* Ajuste el margen */
+    }
+    /* --- FIN DE AJUSTES CLAVE PARA EL RECUADRO BLANCO --- */
+
+
+    .logos-acreditaciones {
+        gap: 20px;
+    }
+
+    .logo-acreditacion {
+        height: 80px;
+    }
+
+    .services-title, #BLOG h2, #TESTIMONIOS h2, #CONTACTO h2 {
+        font-size: 2.2em;
+    }
+
+    .services-intro-paragraph {
+        font-size: 1.1em;
+    }
+
+    /* SERVICIOS-MAIN (Grid de servicios) */
+    .services-grid-container {
+        grid-template-columns: 1fr; /* Una sola columna en móvil */
+        gap: 20px;
+        padding: 0; /* Si ya el padre section tiene padding, este puede ser 0 */
+    }
+    .service-subsection {
+        padding: 20px; /* Reduce el padding de las tarjetas de servicio */
+    }
+
+    /* SERVICIOS.HTML DETALLE */
+    .services-content-wrapper {
+        padding: 20px 15px; /* Ajusta el padding del contenido principal */
+    }
+    .page-main-title {
+        font-size: 2.2em !important; /* Ajusta el tamaño del título de la página de servicios */
+        margin-bottom: 20px !important;
+    }
+    .services-banner-image {
+        margin-bottom: 20px !important; /* Reduce el margen inferior */
+    }
+    .service-detail-section h2 {
+        font-size: 1.8em !important;
+        margin-top: 30px !important;
+    }
+    .service-detail-image {
+        margin: 15px auto 20px auto !important; /* Ajusta márgenes para móvil */
+    }
+    .warning-box {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+
+    /* Ajuste para la imagen en móvil */
+    .services-banner-image {
+        margin: 20px auto 30px auto; /* Ajusta el margen si es necesario en pantallas pequeñas */
+    }
+
+
+    .service-detail-section h3,
+    .service-detail-section p,
+    .service-detail-section ul,
+    .service-detail-section ol,
+    .service-detail-section .modalidades-tarifas h4,
+    .service-detail-section .warning-box
+    {
+        text-align: justify;
+    }
+}
+
+/* @media para el menú de hamburguesa */
+@media (max-width: 768px) {
+    header {
+        padding: 10px 15px;
+    }
+    .logo {
+        height: 45px;
+        width: 45px;
+    }
+    .texto-header .firma {
+        font-size: 1.1em;
+    }
+    .menu-toggle {
+        font-size: 1.6em;
+    }
+
+    .header-bottom nav a {
+        padding: 8px 12px;
+        font-size: 1em;
+    }
+
+    .social-icons-header a {
+        font-size: 1.3em;
+        margin-left: 10px;
+    }
+}
+
+/* Opcional: Breakpoint para pantallas muy pequeñas (ej. iPhone 5/SE) si es necesario un ajuste más fino */
+@media (max-width: 480px) {
+    .about-container {
+        width: 98%; /* Ocupa aún más el ancho */
+        padding: 15px; /* Más compacto */
+    }
+    .about-content-text p {
+        font-size: 0.95em; /* Ligeramente más pequeño el texto */
+    }
+    #ACERCA-DE-MI h2 {
+        font-size: 2.5em; /* Título principal aún más pequeño */
     }
 }
