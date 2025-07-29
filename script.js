@@ -10,10 +10,9 @@
 function scrollToSection(sectionId, smooth) {
     const section = document.getElementById(sectionId);
     if (section) {
-        section.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
-        console.log(`[scrollToSection] Desplazando a: "${sectionId}" (suave: ${smooth})`);
+        section.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto' });
     } else {
-        console.warn(`[scrollToSection] Sección con ID "${sectionId}" no encontrada. No se pudo desplazar.`);
+        console.warn(`[scrollToSection] Sección con ID "${sectionId}" no encontrada.`);
     }
 }
 
@@ -24,34 +23,42 @@ function scrollToSection(sectionId, smooth) {
  */
 function showMainSection(idToShow) {
     // Solo aplica esta lógica si estamos en index.html
-    const isIndexPage = window.location.pathname.endsWith('index.html') || window.location.pathname === '/';
-    if (!isIndexPage) {
-        console.warn('[showMainSection] Esta función solo debe usarse en index.html. Ignorando.');
+    if (!window.location.pathname.includes('index.html') && window.location.pathname !== '/') {
+        console.warn('[showMainSection] Esta función solo debe usarse en index.html');
         return;
     }
 
-    const mainSections = document.querySelectorAll('main section'); // Más específico: solo secciones dentro de <main>
-    let targetSectionId = idToShow || 'INICIO'; // Usa 'INICIO' como valor por defecto si idToShow es falsy
+    const mainSections = document.querySelectorAll('section'); // Todas las etiquetas <section>
+    let targetSectionId = idToShow;
+    const defaultSectionId = 'INICIO'; // Sección por defecto si no hay hash o es inválido
 
-    // Verifica si la sección objetivo existe. Si no, usa la por defecto.
+    // Determine la sección a mostrar
     const sectionExists = document.getElementById(targetSectionId);
-    if (!sectionExists) {
-        console.log(`[showMainSection] Hash "${idToShow}" no válido o sección no encontrada. Mostrando por defecto: "INICIO".`);
-        targetSectionId = 'INICIO'; // Asegura que si el hash inicial no existe, volvamos a INICIO
+    if (!sectionExists || targetSectionId === "" || !targetSectionId) { // Si el hash no existe, está vacío o es nulo
+        targetSectionId = defaultSectionId;
+        console.log(`[showMainSection] Hash no válido o vacío. Mostrando por defecto: "${targetSectionId}".`);
     } else {
-        console.log(`[showMainSection] Intentando mostrar sección: "${targetSectionId}".`);
+        console.log(`[showMainSection] Mostrando sección del hash: "${targetSectionId}".`);
     }
 
     mainSections.forEach(section => {
         if (section.id === targetSectionId) {
             section.classList.remove('section-hidden'); // Elimina la clase para mostrarla
-            // section.classList.add('is-active'); // Opcional: añadir una clase 'is-active' si quieres estilos específicos
+            // Opcional: añadir una clase 'is-active' si quieres estilos específicos para la sección activa
+            // section.classList.add('is-active');
             console.log(`[showMainSection] Sección principal activa: ${section.id}`);
         } else {
             section.classList.add('section-hidden'); // Añade la clase para ocultarla
-            // section.classList.remove('is-active'); // Opcional: quitar la clase 'is-active'
+            // Opcional: quitar la clase 'is-active'
+            // section.classList.remove('is-active');
             console.log(`[showMainSection] Sección principal oculta: ${section.id}`);
         }
+    });
+
+    // Desplázate a la sección activa (instantáneo al cargar, suave al navegar)
+    requestAnimationFrame(() => {
+        // Al cargar la página es instantáneo, al navegar (clic en enlace) se hace suave
+        scrollToSection(targetSectionId, false); // Esto es instantáneo al cargar la página. La navegación viaja a través del hash.
     });
 }
 
@@ -61,34 +68,48 @@ function showMainSection(idToShow) {
  * @param {string} idToShow - El ID de la sección de detalle de servicio a mostrar.
  */
 function showServiceDetailSection(idToShow) {
-    const isServiciosPage = window.location.pathname.endsWith('servicios.html');
-    if (!isServiciosPage) {
-        console.warn('[showServiceDetailSection] Esta función solo debe usarse en servicios.html. Ignorando.');
+    // RE-CAMBIO CLAVE: Volver a 'servicios.html' (en plural) aquí.
+    if (!window.location.pathname.includes('servicios.html')) {
+        console.warn('[showServiceDetailSection] Esta función solo debe usarse en servicios.html');
         return;
     }
 
     const serviceDetailSections = document.querySelectorAll('.service-detail-section');
-    let targetSectionId = idToShow || 'terapia-individual'; // Sección por defecto si no hay hash o es inválido
+    let targetSectionId = idToShow;
+    const defaultSectionId = 'terapia-individual'; // Sección por defecto si no hay hash o es inválido
 
+    // Determine la sección a mostrar
     const sectionExists = document.getElementById(targetSectionId);
-    if (!sectionExists) {
-        console.log(`[showServiceDetailSection] Hash "${idToShow}" no válido o sección no encontrada. Mostrando por defecto: "terapia-individual".`);
-        targetSectionId = 'terapia-individual'; // Asegura que si el hash inicial no existe, volvamos a terapia-individual
+    if (!sectionExists || targetSectionId === "") { // Si el hash no existe o está vacío
+        targetSectionId = defaultSectionId;
+        console.log(`[showServiceDetailSection] Hash no válido o vacío. Mostrando por defecto: "${targetSectionId}".`);
     } else {
-        console.log(`[showServiceDetailSection] Intentando mostrar sección: "${targetSectionId}".`);
+        console.log(`[showServiceDetailSection] Mostrando sección del hash: "${targetSectionId}".`);
     }
+
+    let foundSection = false;
 
     serviceDetailSections.forEach(section => {
         if (section.id === targetSectionId) {
             section.classList.add('is-active'); // Añade la clase para mostrar
             section.classList.remove('section-hidden'); // Asegúrate de quitar section-hidden si lo tenías
-            console.log(`[showServiceDetailSection] Sección de servicio activa: ${section.id}`);
+            foundSection = true;
+            console.log(`[showServiceDetailSection] Sección activa: ${section.id}`);
         } else {
             section.classList.remove('is-active'); // Quita la clase para ocultar
             section.classList.add('section-hidden'); // Asegúrate de añadir section-hidden
-            console.log(`[showServiceDetailSection] Sección de servicio oculta: ${section.id}`);
+            console.log(`[showServiceDetailSection] Sección oculta: ${section.id}`);
         }
     });
+
+    // Desplázate a la sección activa (instantáneo al cargar)
+    if (foundSection || document.getElementById(defaultSectionId)) {
+        requestAnimationFrame(() => {
+            scrollToSection(targetSectionId, false);
+        });
+    } else {
+        console.warn(`[showServiceDetailSection] No se pudo activar ninguna sección. Revisa los IDs de las secciones.`);
+    }
 }
 
 
@@ -97,27 +118,25 @@ function showServiceDetailSection(idToShow) {
 // =====================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Detecta la página actual de manera más robusta
-    const isIndexPage = window.location.pathname.endsWith('index.html') || window.location.pathname === '/';
-    const isServiciosPage = window.location.pathname.endsWith('servicios.html');
+    // Detecta la página actual
+    const isIndexPage = window.location.pathname.includes('index.html') || window.location.pathname === '/'; // Incluye la raíz
+    const isServiciosPage = window.location.pathname.includes('servicios.html');
 
     // Obtiene el hash inicial de la URL
     const initialHash = window.location.hash.substring(1);
-    console.log(`[DOMContentLoaded] Iniciando. Hash inicial: "${initialHash}". Página actual: ${isIndexPage ? 'Index' : (isServiciosPage ? 'Servicios' : 'Otra')}.`);
+    console.log(`[DOMContentLoaded] Hash inicial: "${initialHash}". isIndexPage: ${isIndexPage}, isServiciosPage: ${isServiciosPage}`);
 
     // Lógica de visualización de secciones según la página
     if (isIndexPage) {
+        // Al cargar index.html, muestra la sección según el hash o 'INICIO'
         showMainSection(initialHash);
-        // Desplaza instantáneamente al cargar para que el usuario vea la sección correcta sin un "salto" suave inicial
-        scrollToSection(initialHash || 'INICIO', false);
     } else if (isServiciosPage) {
+        // Al cargar servicios.html, muestra la sección de detalle de servicio según el hash
         showServiceDetailSection(initialHash);
-        // Desplaza instantáneamente al cargar
-        scrollToSection(initialHash || 'terapia-individual', false);
     } else {
         // Para cualquier otra página, solo desplázate al top
         window.scrollTo({ top: 0, behavior: 'auto' });
-        console.log('[DOMContentLoaded - Otra Página] Desplazando al top de la página.');
+        console.log('[DOMContentLoaded - Otra Página] Desplazando al top.');
     }
 
 
@@ -126,45 +145,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================================================
 
     const menuToggle = document.querySelector('.menu-toggle');
-    const headerBottom = document.querySelector('.header-bottom'); // Menú móvil
+    // Usamos .header-bottom como en tu CSS para el menú móvil
+    const headerBottom = document.querySelector('.header-bottom');
 
     if (menuToggle && headerBottom) {
         menuToggle.addEventListener('click', () => {
-            headerBottom.classList.toggle('is-open');
-            menuToggle.classList.toggle('active'); // Para cambiar el icono
+            headerBottom.classList.toggle('is-open'); // Usa 'is-open'
+            // Opcional: si quieres que el icono cambie a una 'X'
+            menuToggle.classList.toggle('active');
             menuToggle.setAttribute('aria-expanded', headerBottom.classList.contains('is-open'));
-            console.log(`[Menú Hamburguesa] Menú ${headerBottom.classList.contains('is-open') ? 'abierto' : 'cerrado'}.`);
         });
     }
 
-    // Funcionalidad para cerrar el menú y manejar la navegación al hacer clic en un enlace
+    // Funcionalidad para cerrar el menú al hacer clic en un enlace
+    // Seleccionamos todos los enlaces de navegación, estén o no dentro del menú móvil
     document.querySelectorAll('nav a').forEach(link => {
         link.addEventListener('click', function(event) {
-            const href = this.getAttribute('href');
-            const url = new URL(href, window.location.origin); // Crea una URL completa para una comparación robusta
+            const targetId = this.getAttribute('href').substring(1); // Obtiene el ID (ej. "INICIO", "ACERCA-DE-MI")
+            const isExternalLink = !targetId || targetId.includes('.html'); // Detecta si es un enlace a otra página o a otra sección de la misma página
 
-            // Determina si el enlace es a una página diferente (index.html vs servicios.html)
-            const isDifferentPageLink = url.pathname !== window.location.pathname && (url.pathname.endsWith('index.html') || url.pathname.endsWith('servicios.html') || url.pathname === '/');
-
-            // Si es un enlace a una página diferente (ej. de index.html a servicios.html), permite la navegación normal del navegador.
-            if (isDifferentPageLink) {
-                console.log(`[Navegación] Enlace a página diferente detectado: "${href}". Permitida navegación estándar.`);
-                // Asegúrate de que el menú se cierra antes de la navegación si es visible
-                if (headerBottom && headerBottom.classList.contains('is-open')) {
-                    headerBottom.classList.remove('is-open');
-                    if (menuToggle) {
-                        menuToggle.classList.remove('active');
-                        menuToggle.setAttribute('aria-expanded', 'false');
-                    }
-                }
-                return; // No se hace preventDefault, el navegador maneja la recarga.
+            // Si es un enlace a otra página (ej. "servicios.html"), deja que el navegador haga su trabajo normal
+            if (isExternalLink && isIndexPage) { // Si estoy en index.html y el link es a servicios.html
+                // Deja que el navegador navegue a servicios.html
+                return;
+            } else if (isExternalLink && isServiciosPage) { // Si estoy en servicios.html y el link es a index.html
+                // Deja que el navegador navegue a index.html
+                return;
             }
 
-            // Si es un enlace interno (hash link en la misma página HTML), manejamos con SPA.
             event.preventDefault(); // Previene el comportamiento por defecto SÓLO si es un enlace interno de SPA
-
-            const targetId = url.hash.substring(1); // Obtiene el ID del hash (ej. "INICIO", "terapia-individual")
-            console.log(`[Navegación SPA] Enlace interno clicado: "${href}". ID de destino: "${targetId || 'ninguno (ruta base)'}".`);
 
             // Cierra el menú móvil si está abierto
             if (headerBottom && headerBottom.classList.contains('is-open')) {
@@ -173,41 +182,32 @@ document.addEventListener('DOMContentLoaded', () => {
                     menuToggle.classList.remove('active');
                     menuToggle.setAttribute('aria-expanded', 'false');
                 }
-                console.log('[Navegación SPA] Menú móvil cerrado.');
             }
 
             // Lógica para mostrar la sección correcta según la página actual
             if (isIndexPage) {
                 showMainSection(targetId);
             } else if (isServiciosPage) {
-                showServiceDetailSection(targetId);
+                showServiceDetailSection(targetId); // Si tus enlaces de servicios.html apuntan a IDs de secciones
             }
 
-            // Actualizar la URL sin recargar la página (para compartir enlaces)
-            // Solo actualiza si hay un hash válido para no dejar un '#' vacío
-            if (targetId) {
-                history.pushState(null, '', `#${targetId}`);
-            } else {
-                // Si el enlace era a la raíz (ej. index.html#), limpiar el hash de la URL
-                history.pushState(null, '', window.location.pathname);
-            }
-
+            // Opcional: Actualizar la URL sin recargar la página (para compartir enlaces)
+            history.pushState(null, '', `#${targetId}`);
 
             // Desplázate suavemente a la sección activa después de la navegación de SPA
-            scrollToSection(targetId || (isIndexPage ? 'INICIO' : 'terapia-individual'), true); // True para desplazamiento suave
+            scrollToSection(targetId, true); // True para desplazamiento suave
         });
     });
 
     // =====================================================================
-    // Manejo de enlaces específicos fuera del nav principal
+    // Manejo de enlaces específicos
     // =====================================================================
 
-    // Manejar el botón "Conóceme más" en #INICIO (asumiendo que está en index.html)
+    // Manejar el botón "Conóceme más" en #INICIO
     const internalAboutLink = document.querySelector('.internal-section-link');
     if (internalAboutLink && isIndexPage) {
         internalAboutLink.addEventListener('click', function(event) {
             event.preventDefault();
-            console.log('[Enlace Interno] Clic en "Conóceme más".');
             showMainSection('ACERCA-DE-MI');
             history.pushState(null, '', '#ACERCA-DE-MI');
             scrollToSection('ACERCA-DE-MI', true);
@@ -218,45 +218,36 @@ document.addEventListener('DOMContentLoaded', () => {
                     menuToggle.classList.remove('active');
                     menuToggle.setAttribute('aria-expanded', 'false');
                 }
-                console.log('[Enlace Interno] Menú móvil cerrado después de clic.');
             }
         });
     }
 
-    // Manejar el botón "Saber Más" en las tarjetas de servicio (en index.html o servicios.html)
-    // Asumo que si están en index.html, redirigen a servicios.html#ID
-    // Y si están en servicios.html, activan una sección interna de esa misma página.
+    // Manejar el botón "Saber Más" en las tarjetas de servicio (en index.html si apuntan a servicios.html)
+    // Asumo que estos botones redirigen a servicios.html y un hash específico allí.
     const saberMasButtons = document.querySelectorAll('.btn-saber-mas');
-    if (saberMasButtons.length > 0) { // Aplicar el listener en ambas páginas
+    if (saberMasButtons.length > 0 && isIndexPage) {
         saberMasButtons.forEach(button => {
             button.addEventListener('click', function(event) {
-                const href = this.getAttribute('href');
-                const url = new URL(href, window.location.origin);
-
-                // Si el botón lleva a otra página (ej. de index.html a servicios.html)
-                if (url.pathname !== window.location.pathname) {
-                    // No hacemos preventDefault, permitimos la navegación normal.
-                    console.log(`[Botón "Saber Más"] Clic en botón que redirige a página diferente: "${href}".`);
-                    return;
-                }
-
-                // Si el botón apunta a un hash en la misma página (ej. en servicios.html)
-                event.preventDefault(); // Previene el comportamiento por defecto
-                const targetServiceId = url.hash.substring(1); // Obtiene el ID del hash
-                console.log(`[Botón "Saber Más"] Clic en botón interno. ID de destino: "${targetServiceId}".`);
-
+                // Aquí, el botón "Saber Más" DEBE tener un href que apunte a servicios.html#ID_DE_SERVICIO
+                // No necesitamos event.preventDefault() si estamos haciendo una navegación a otra página HTML.
+                // Si el href es, por ejemplo, "servicios.html#terapia-individual"
+                // El navegador se encargará de la navegación.
+                // Puedes añadir un console.log para verificar el href.
+                console.log('Botón "Saber Más" clicado. Redirigiendo a:', this.getAttribute('href'));
+            });
+        });
+    } else if (saberMasButtons.length > 0 && isServiciosPage) {
+        // Si estamos en servicios.html y los botones "Saber Más" activan secciones dentro de servicios.html
+        saberMasButtons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault(); // Previene el comportamiento por defecto si es una SPA interna
+                const targetServiceId = this.getAttribute('data-target-section'); // Asume que tienes un data-target-section
                 if (targetServiceId) {
-                    if (isServiciosPage) {
-                        showServiceDetailSection(targetServiceId);
-                    } else if (isIndexPage) {
-                        // Si por alguna razón un botón "saber más" en index.html apunta a un hash
-                        // dentro de index.html (menos común para "saber más" pero posible)
-                        showMainSection(targetServiceId);
-                    }
+                    showServiceDetailSection(targetServiceId);
                     history.pushState(null, '', `#${targetServiceId}`);
                     scrollToSection(targetServiceId, true);
                 } else {
-                    console.warn('[Botón "Saber Más"] Botón sin hash válido. No se realizó acción.');
+                    console.warn('[saberMasButtons] Botón "Saber Más" en servicios.html sin atributo data-target-section.');
                 }
             });
         });
@@ -268,13 +259,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================================================
     window.addEventListener('popstate', function() {
         const hash = window.location.hash.substring(1);
-        console.log(`[Popstate] Evento detectado. Hash actual: "${hash || 'ninguno'}".`);
         if (isIndexPage) {
             showMainSection(hash || 'INICIO');
-            scrollToSection(hash || 'INICIO', true); // Suave al volver con historial
         } else if (isServiciosPage) {
             showServiceDetailSection(hash || 'terapia-individual');
-            scrollToSection(hash || 'terapia-individual', true); // Suave al volver con historial
         }
     });
 
@@ -282,42 +270,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // CÓDIGO DE ENVÍO DE FORMULARIO (EmailJS)
     // =====================================================================
 
-    // Inicializa EmailJS - Asegúrate de reemplazar "Ex-FLrxnRjs86Lv0J" con tu PUBLIC KEY REAL de EmailJS
-    const EMAILJS_PUBLIC_KEY = "Ex-FLrxnRjs86Lv0J"; // Tu Public Key/User ID
-    const EMAILJS_SERVICE_ID = "Psico Luismi";
-    const EMAILJS_TEMPLATE_ID = "template_i8e2jgj";
-
-    if (typeof emailjs !== 'undefined' && emailjs.init) { // Asegúrate de que EmailJS y su método init estén disponibles
-        emailjs.init({
-            publicKey: EMAILJS_PUBLIC_KEY // Usar 'publicKey' en lugar de 'userId'
-        });
-        console.log('[EmailJS] Inicializado con éxito.');
+    // Inicializa EmailJS - Asegúrate de reemplazar "Ex-FLrxnRjs86Lv0J" con tu USER ID REAL de EmailJS
+    if (typeof emailjs !== 'undefined') { // Asegúrate de que EmailJS se haya cargado
+        emailjs.init("Ex-FLrxnRjs86Lv0J"); // Tu Public Key/User ID
     } else {
-        console.error("EmailJS no está cargado o su método init no está disponible. Asegúrate de incluir el script de EmailJS antes de este script.");
-    }
-
-    /**
-     * Función genérica para enviar formularios con EmailJS.
-     * @param {HTMLFormElement} formElement - El elemento del formulario a enviar.
-     * @param {string} formName - Un nombre descriptivo para el formulario (para mensajes de alerta/consola).
-     */
-    function sendEmailForm(formElement, formName) {
-        if (typeof emailjs === 'undefined' || !emailjs.sendForm) {
-            alert(`El servicio de EmailJS no está disponible para el formulario de ${formName}.`);
-            console.error(`[EmailJS Error] El servicio de EmailJS no está disponible para el formulario de ${formName}.`);
-            return;
-        }
-
-        console.log(`[EmailJS] Intentando enviar formulario: "${formName}".`);
-        emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, formElement)
-            .then(function() {
-                alert(`¡Tu mensaje ha sido enviado con éxito desde el formulario de ${formName}!`);
-                formElement.reset(); // Limpia el formulario
-                console.log(`[EmailJS] Formulario de "${formName}" enviado exitosamente.`);
-            }, function(error) {
-                alert(`¡Oh! Ha ocurrido un error al enviar el mensaje desde el formulario de ${formName}. Por favor, inténtalo de nuevo. Error: ${JSON.stringify(error.text || error)}`);
-                console.error(`[EmailJS Error] Error al enviar formulario (${formName} Form):`, error);
-            });
+        console.error("EmailJS no está cargado. Asegúrate de incluir el script de EmailJS antes de este script.");
     }
 
     // *** FORMULARIO DE CONTACTO EN index.html (ID: contact-form) ***
@@ -325,16 +282,42 @@ document.addEventListener('DOMContentLoaded', () => {
     if (contactForm) {
         contactForm.addEventListener('submit', function(event) {
             event.preventDefault(); // Evita el envío por defecto
-            sendEmailForm(this, 'página principal');
+
+            if (typeof emailjs !== 'undefined') {
+                // Se ha actualizado el Service ID y el Template ID
+                emailjs.sendForm('Psico Luismi', 'template_i8e2jgj', this)
+                    .then(function() {
+                        alert('¡Tu mensaje ha sido enviado con éxito desde la página principal!');
+                        contactForm.reset(); // Limpia el formulario
+                    }, function(error) {
+                        alert('¡Oh! Ha ocurrido un error al enviar el mensaje desde la página principal. Por favor, inténtalo de nuevo. Error: ' + JSON.stringify(error));
+                        console.error('EmailJS Error (Main Form):', error);
+                    });
+            } else {
+                alert('El servicio de EmailJS no está disponible para el formulario principal.');
+            }
         });
     }
 
     // *** FORMULARIO DE CONTACTO EN servicios.html (ID: contact-form-sidebar) ***
-    const contactFormSidebar = document.getElementById('contact-form-sidebar');
+    const contactFormSidebar = document.getElementById('contact-form-sidebar'); // Selector correcto para el formulario de la barra lateral
     if (contactFormSidebar) {
         contactFormSidebar.addEventListener('submit', function(event) {
             event.preventDefault(); // Evita el envío por defecto
-            sendEmailForm(this, 'servicios (barra lateral)');
+
+            if (typeof emailjs !== 'undefined') {
+                // Se ha actualizado el Service ID y el Template ID
+                emailjs.sendForm('Psico Luismi', 'template_i8e2jgj', this) // Asumiendo los mismos IDs que el formulario principal
+                    .then(function() {
+                        alert('¡Tu mensaje ha sido enviado con éxito desde el formulario de servicios!');
+                        contactFormSidebar.reset(); // Limpia el formulario
+                    }, function(error) {
+                        alert('¡Oh! Ha ocurrido un error al enviar el mensaje desde el formulario de servicios. Por favor, inténtalo de nuevo. Error: ' + JSON.stringify(error));
+                        console.error('EmailJS Error (Sidebar Form):', error);
+                    });
+            } else {
+                alert('El servicio de EmailJS no está disponible para el formulario de servicios.');
+            }
         });
     }
 });
