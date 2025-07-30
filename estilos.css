@@ -1268,16 +1268,4 @@ footer {
     #ACERCA-DE-MI h2 {
         font-size: 2.5em; /* Título principal aún más pequeño */
     }
-    .logo {
-    height: 60px; /* Ajusta la altura de tu logo */
-    width: 60px;  /* Ajusta el ancho de tu logo */
-    border-radius: 50%; /* Si quieres que sea circular, como la imagen de perfil actual */
-    object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsionarse */
-}
-
-@media (max-width: 768px) {
-    .logo {
-        height: 50px; /* Reduce el tamaño en pantallas pequeñas */
-        width: 50px;
-    }
 }
