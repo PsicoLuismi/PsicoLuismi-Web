@@ -33,6 +33,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 140px;
 }
 
 body {
@@ -43,6 +44,7 @@ body {
     overflow-x: hidden;
     margin: 0;
     padding: 0;
+    padding-top: 140px;
 }
 
 /* ===================================== */
@@ -73,7 +75,7 @@ section {
 #INICIO {
     background-color: var(--color-bg-very-light);
     color: var(--color-text-dark);
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 140px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -105,13 +107,14 @@ section {
     display: inline-block;
     background-color: var(--color-primary);
     color: #fff;
-    padding: 15px 30px;
+    padding: 10px 20px;
     border-radius: 30px;
     text-decoration: none;
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 0.9em;
     transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0 4px 10px var(--color-shadow);
+    margin-top: 10px;
 }
 
 .agenda-btn:hover {
@@ -143,7 +146,10 @@ header {
     justify-content: center;
     gap: 15px;
     flex-wrap: wrap;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
     box-shadow: 0 2px 10px var(--color-shadow);
     width: 100%;
@@ -192,6 +198,10 @@ header {
 
 /* Asegúrate de que esta media query está debajo de los estilos generales del header */
 @media (max-width: 768px) {
+    body {
+        padding-top: 120px; /* Altura menor en móviles */
+    }
+    
     header {
         padding: 10px 15px; /* Más estrecho el padding para pantallas pequeñas */
     }
@@ -203,6 +213,10 @@ header {
 
     .texto-header .firma {
         font-size: 1.2em; /* Ajusta aún más el tamaño de la firma si es necesario */
+    }
+    
+    #INICIO {
+        min-height: calc(100vh - 120px); /* Ajustar para móviles */
     }
 }
 
@@ -412,7 +426,10 @@ header {
 #SERVICIOS-MAIN {
     background-color: #e6eef5;
     text-align: center;
-    padding: 80px 40px;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 .services-title {
@@ -512,7 +529,10 @@ header {
 #BLOG {
     background-color: var(--color-bg-very-light);
     text-align: center;
-    padding: 80px 40px;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 #BLOG h2 {
@@ -529,32 +549,30 @@ header {
     line-height: 1.7;
 }
 
+
 /* ===================================== */
 /* SECCIÓN TESTIMONIOS */
 /* ===================================== */
 #TESTIMONIOS {
-    background-color: var(--color-primary);
-    color: #fff;
+    background-color: var(--color-bg-very-light); /* Fondo como la sección de inicio */
+    color: var(--color-text-dark); /* Color de texto oscuro para que se lea bien */
     text-align: center;
     padding: 80px 40px;
 }
-
 #TESTIMONIOS h2 {
     font-size: 2.5em;
-    color: var(--color-secondary);
+    color: var(--color-primary);
     margin-bottom: 50px;
     font-family: var(--font-heading);
 }
-
 .testimonial-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
     max-width: 100%;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 80px 40px; /* Se agregó el padding aquí */
 }
-
 .testimonial-item {
     background-color: #fff;
     color: var(--color-text-dark);
@@ -563,13 +581,11 @@ header {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     text-align: left;
 }
-
 .testimonial-item p {
     font-size: 1.1em;
     margin-bottom: 20px;
     line-height: 1.7;
 }
-
 .testimonial-item span {
     font-weight: bold;
     color: var(--color-primary);
@@ -1106,10 +1122,14 @@ footer {
     }
 
     /* --- AJUSTES CLAVE PARA EL RECUADRO BLANCO (ACERCA DE MI) --- */
-    #ACERCA-DE-MI {
-         background-color: #ffffff;
-        padding: 40px 15px; /* Ajusta el padding de la sección en móvil */
-    }
+   #ACERCA-DE-MI {
+    background-color: var(--color-bg-light);
+    text-align: center;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
 
     .about-container {
         flex-direction: column; /* Apila los elementos en columna */
@@ -1281,4 +1301,11 @@ footer {
         width: 50px;
     }
 }
+/* ===================================== */
+/* AJUSTE PARA QUITAR EL ESPACIO BLANCO ENTRE EL HEADER Y LA SECCIÓN DE TESTIMONIOS EN MÓVIL */
+/* ===================================== */
+@media (max-width: 768px) {
+    #TESTIMONIOS {
+        padding-top: 100px; /* Ajusta este valor si tu header móvil es más alto */
+    }
 }
