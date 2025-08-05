@@ -320,4 +320,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    console.log('[DOMContentLoaded] Inicialización completa.');
 });
